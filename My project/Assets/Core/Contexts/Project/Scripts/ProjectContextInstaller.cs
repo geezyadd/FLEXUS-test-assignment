@@ -1,4 +1,5 @@
 using Features.AssetLoaderModule.Scripts;
+using Features.InputModule.Scripts;
 using Features.SceneLoaderModule.Scripts;
 using Zenject;
 
@@ -10,6 +11,7 @@ namespace Core.Contexts.Project.Scripts
         {
             AssetLoaderInstaller.Install(Container);
             SceneLoaderInstaller.Install(Container);
+            InputInstaller.Install(Container);
         }
     }
 }
