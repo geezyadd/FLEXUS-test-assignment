@@ -33,6 +33,8 @@
 # Generated IDE project files
 ExportedObj/
 *.csproj
+# Zenject ships its own .csproj files inside Assets; keep them so their .meta files are not orphaned
+!/My project/Assets/Plugins/Zenject/**/*.csproj
 *.unityproj
 *.sln
 *.slnx
