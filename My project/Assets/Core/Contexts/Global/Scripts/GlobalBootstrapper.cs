@@ -5,7 +5,6 @@ using Zenject;
 
 namespace Core.Contexts.Global.Scripts
 {
-    // GlobalScene -> GameScene (additive, becomes the active scene).
     public class GlobalBootstrapper : MonoBehaviour
     {
         private ISceneLoader _sceneLoader;

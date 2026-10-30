@@ -5,7 +5,6 @@ using Zenject;
 
 namespace Core.Contexts.Bootstrap.Scripts
 {
-    // Entry point: BootstrapScene -> GlobalScene.
     public class Bootstrapper : MonoBehaviour
     {
         private ISceneLoader _sceneLoader;

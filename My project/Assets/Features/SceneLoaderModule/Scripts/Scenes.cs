@@ -1,6 +1,5 @@
 namespace Features.SceneLoaderModule.Scripts
 {
-    // Names must match the scene file names in Build Settings.
     public enum Scenes
     {
         None = 0,

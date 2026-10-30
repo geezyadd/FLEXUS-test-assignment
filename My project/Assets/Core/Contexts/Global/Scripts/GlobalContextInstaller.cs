@@ -3,11 +3,11 @@ using Zenject;
 
 namespace Core.Contexts.Global.Scripts
 {
-    // GlobalScene stays loaded; GameScene is loaded on top of it and inherits these bindings.
     public class GlobalContextInstaller : MonoInstaller<GlobalContextInstaller>
     {
         public override void InstallBindings()
         {
+            ConfigurationInstaller.Install(Container);
             DataInstaller.Install(Container);
         }
     }

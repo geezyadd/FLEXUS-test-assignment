@@ -1,3 +1,4 @@
+using Features.AssetLoaderModule.Scripts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,27 +6,28 @@ namespace Features.SceneLoaderModule.Scripts
 {
     public class SceneLoader : ISceneLoader
     {
+        private readonly IAssetLoaderService _assetLoader;
+
+        public SceneLoader(IAssetLoaderService assetLoader) =>
+            _assetLoader = assetLoader;
+
         public async Awaitable LoadSceneAsync(Scenes scene, LoadSceneMode mode, bool setActive = false)
         {
-            string sceneName = scene.ToString();
+            Scene loadedScene = SceneManager.GetSceneByName(scene.ToString());
 
-            if (SceneManager.GetSceneByName(sceneName).isLoaded)
-                return;
-
-            await SceneManager.LoadSceneAsync(sceneName, mode);
+            if (loadedScene.isLoaded == false)
+                loadedScene = await _assetLoader.LoadSceneAsync(scene.ToString(), mode);
 
             if (setActive)
-                SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
+                SceneManager.SetActiveScene(loadedScene);
         }
 
         public async Awaitable UnloadSceneAsync(Scenes scene)
         {
-            string sceneName = scene.ToString();
-
-            if (SceneManager.GetSceneByName(sceneName).isLoaded == false)
+            if (SceneManager.GetSceneByName(scene.ToString()).isLoaded == false)
                 return;
 
-            await SceneManager.UnloadSceneAsync(sceneName);
+            await _assetLoader.UnloadSceneAsync(scene.ToString());
         }
     }
 }
