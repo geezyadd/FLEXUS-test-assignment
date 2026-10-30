@@ -1,3 +1,4 @@
+using Features.AssetLoaderModule.Scripts;
 using Features.SceneLoaderModule.Scripts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,7 +18,7 @@ namespace Core.Contexts.Bootstrap.Scripts
 
         private async void Start()
         {
-            await _sceneLoader.LoadSceneAsync(Scenes.GlobalScene, LoadSceneMode.Single);
+            await _sceneLoader.LoadSceneAsync(Address.Scenes.GlobalScene, LoadSceneMode.Single);
         }
     }
 }
