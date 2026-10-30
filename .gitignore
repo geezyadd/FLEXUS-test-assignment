@@ -1,0 +1,90 @@
+# Unity project is located in /My project.
+# Keep Assets, Packages and ProjectSettings under version control.
+
+# ParrelSync project clones
+/My project_clone*/
+
+# Unity-generated directories
+/My project/[Ll]ibrary/
+/My project/[Tt]emp/
+/My project/[Oo]bj/
+/My project/[Bb]uild/
+/My project/[Bb]uilds/
+/My project/[Ll]ogs/
+/My project/[Uu]ser[Ss]ettings/
+/My project/[Mm]emoryCaptures/
+/My project/[Rr]ecordings/
+/My project/.utmp/
+/My project/UIElementsSchema/
+*.log
+
+# Blender backup files
+*.blend1
+*.blend1.meta
+
+# IDE and editor caches
+.idea/
+.vs/
+.vscode/
+.consulo/
+.gradle/
+*.DotSettings.user
+
+# Generated IDE project files
+ExportedObj/
+*.csproj
+*.unityproj
+*.sln
+*.slnx
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Generated debug and crash files
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+sysinfo.txt
+mono_crash.*
+
+# Build artifacts
+*.apk
+*.aab
+*.unitypackage
+*.unitypackage.meta
+*.app
+crashlytics-build.properties
+
+# Unity Test Runner
+InitTestScene*.unity*
+
+# Addressables-generated content
+/My project/ServerData/
+/My project/[Aa]ssets/StreamingAssets/aa*
+/My project/[Aa]ssets/AddressableAssetsData/link.xml*
+/My project/[Aa]ssets/Addressables_Temp*
+/My project/[Aa]ssets/AddressableAssetsData/*/*.bin*
+
+# Visual Scripting-generated files
+/My project/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db
+/My project/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db.meta
+/My project/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers/
+/My project/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers.meta
+
+# Other Unity-generated content
+/My project/[Aa]ssets/Plugins/Editor/JetBrains*
+/My project/[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+/My project/[Aa]ssets/[Ss]ceneDependencyCache*
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
