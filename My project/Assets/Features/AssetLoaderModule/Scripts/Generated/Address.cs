@@ -4,6 +4,7 @@ namespace Features.AssetLoaderModule.Scripts
     {
         public static class Configurations
         {
+            public const string PhysicsConfiguration = "PhysicsConfiguration";
         }
 
         public static class Scenes

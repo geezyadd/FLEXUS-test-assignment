@@ -1,6 +1,12 @@
+using System;
+using System.Collections.Generic;
+using Features.PhysicsModule.Scripts.Collisions;
 using Features.PhysicsModule.Scripts.Smoothing;
 using UnityEngine;
 using Zenject;
+#if UNITY_EDITOR
+using System.Linq;
+#endif
 
 namespace Features.PhysicsModule.Scripts
 {
@@ -9,6 +15,7 @@ namespace Features.PhysicsModule.Scripts
         [SerializeField] private bool _useGravity = true;
         [SerializeField, Min(0f)] private float _drag;
         [SerializeField] private PhysicsSmoothing _smoothing = PhysicsSmoothing.Interpolate;
+        [SerializeField] private PhysicsColliderBase[] _colliders = Array.Empty<PhysicsColliderBase>();
 
         private IPhysicsWorld _world;
 
@@ -18,6 +25,7 @@ namespace Features.PhysicsModule.Scripts
         public bool UseGravity => _useGravity;
         public float Drag => _drag;
         public PhysicsSmoothing Smoothing => _smoothing;
+        public IReadOnlyList<IPhysicsCollider> Colliders => _colliders;
 
         [Inject]
         private void InjectDependencies(IPhysicsWorld world) => _world = world;
@@ -46,5 +54,21 @@ namespace Features.PhysicsModule.Scripts
 
         private void OnDisable() =>
             _world?.Unregister(this);
+
+#if UNITY_EDITOR
+        private void OnValidate() =>
+            FindColliders();
+
+        public void FindColliders()
+        {
+            PhysicsColliderBase[] colliders = GetComponents<PhysicsColliderBase>();
+
+            if (_colliders != null && _colliders.SequenceEqual(colliders))
+                return;
+
+            _colliders = colliders;
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+#endif
     }
 }

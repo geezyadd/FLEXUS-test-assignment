@@ -1,3 +1,6 @@
+using Features.AssetLoaderModule.Scripts;
+using Features.PhysicsModule.Scripts;
+using Plugins.Zenject.Addons.AddressablesConfigurationsLoader;
 using Zenject;
 
 namespace Core.Data.Scripts
@@ -6,7 +9,7 @@ namespace Core.Data.Scripts
     {
         public override void InstallBindings()
         {
-            // Container.BindConfigurationFromAddressables<PlayerConfig>("PlayerConfig").AsSingle();
+            Container.BindConfigurationFromAddressables<PhysicsConfiguration>(Address.Configurations.PhysicsConfiguration).AsSingle();
         }
     }
 }

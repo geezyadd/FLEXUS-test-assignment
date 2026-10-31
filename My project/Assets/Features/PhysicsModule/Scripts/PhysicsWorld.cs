@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Features.GameUpdaterModule.Scripts;
+using Features.PhysicsModule.Scripts.Collisions;
 using Features.PhysicsModule.Scripts.Smoothing;
 using UnityEngine;
 using Zenject;
@@ -10,14 +11,17 @@ namespace Features.PhysicsModule.Scripts
     public class PhysicsWorld : IPhysicsWorld, IInitializable, IDisposable
     {
         private readonly IGameUpdater _updater;
+        private readonly ICollisionSolver _collisionSolver;
         private readonly List<IPhysicsForce> _forces;
         private readonly Dictionary<PhysicsSmoothing, ISmoothingStrategy> _strategies = new();
         private readonly List<IPhysicsBody> _bodies = new();
         private readonly Dictionary<IPhysicsBody, int> _indices = new();
 
-        public PhysicsWorld(IGameUpdater updater, List<IPhysicsForce> forces, List<ISmoothingStrategy> strategies)
+        public PhysicsWorld(IGameUpdater updater, ICollisionSolver collisionSolver, List<IPhysicsForce> forces,
+            List<ISmoothingStrategy> strategies)
         {
             _updater = updater;
+            _collisionSolver = collisionSolver;
             _forces = forces;
 
             foreach (ISmoothingStrategy strategy in strategies)
@@ -85,15 +89,26 @@ namespace Features.PhysicsModule.Scripts
 
         private void Simulate(IPhysicsBody body, float deltaTime)
         {
-            Vector3 velocity = body.Velocity;
+            Vector3 velocity = ApplyForces(body, body.Velocity, deltaTime);
+            body.Velocity = ApplyDrag(body, velocity, deltaTime);
+            Move(body, body.Velocity * deltaTime);
+        }
 
+        private Vector3 ApplyForces(IPhysicsBody body, Vector3 velocity, float deltaTime)
+        {
             foreach (IPhysicsForce force in _forces)
                 velocity += force.GetForce(body) * deltaTime;
 
-            velocity *= 1f - Mathf.Min(1f, body.Drag * deltaTime);
+            return velocity;
+        }
 
-            body.Velocity = velocity;
-            body.MovePosition(body.Position + velocity * deltaTime);
+        private Vector3 ApplyDrag(IPhysicsBody body, Vector3 velocity, float deltaTime) =>
+            velocity * (1f - Mathf.Min(1f, body.Drag * deltaTime));
+
+        private void Move(IPhysicsBody body, Vector3 move)
+        {
+            if (body.Colliders.Count == 0 || _collisionSolver.TryResolve(body, move) == false)
+                body.MovePosition(body.Position + move);
         }
     }
 }

@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Configurations
   m_GUID: c1b6867b5f1282a4e89fbcac1031cf1b
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: a2c7b68c5bfb75a88aeed08ef518e6dc
+    m_Address: PhysicsConfiguration
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7b0e66cf25b2ba84cafef5acdfbcba20, type: 2}
   m_SchemaSet:
