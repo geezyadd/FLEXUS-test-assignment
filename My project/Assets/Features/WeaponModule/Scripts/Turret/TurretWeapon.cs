@@ -3,9 +3,10 @@ using UnityEngine;
 
 namespace Features.WeaponModule.Scripts.Turret
 {
-    public class TurretWeapon : MonoBehaviour, IWeapon, IRotatable, IPowerAdjustable
+    public class TurretWeapon : MonoBehaviour, IWeapon, IRotatable, IElevatable, IPowerAdjustable
     {
         [SerializeField] private TurretRotator _rotator;
+        [SerializeField] private BarrelElevator _elevator;
         [SerializeField] private ShotPowerRegulator _powerRegulator;
         [SerializeField] private TurretShooter _shooter;
 
@@ -27,6 +28,9 @@ namespace Features.WeaponModule.Scripts.Turret
 
         public void Rotate(float delta) =>
             _rotator.Rotate(delta);
+
+        public void Elevate(float delta) =>
+            _elevator.Elevate(delta);
 
         public void ChangePower(float direction) =>
             _powerRegulator.ChangePower(direction);

@@ -15,6 +15,9 @@ MonoBehaviour:
   _turretPrefab: {fileID: 100001, guid: c0917ae968dda70d326e42418a97d0d3, type: 3}
   _rotationSpeed: 0.15
   _maxYawAngle: 60
+  _elevationSpeed: 0.15
+  _minElevationAngle: -15
+  _maxElevationAngle: 45
   _shotPower: 15
   _minShotPower: 5
   _maxShotPower: 30

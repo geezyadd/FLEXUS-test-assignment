@@ -10,6 +10,9 @@ namespace Features.WeaponModule.Scripts
         [SerializeField] private GameObject _turretPrefab;
         [SerializeField, Min(0f)] private float _rotationSpeed = 0.15f;
         [SerializeField, Range(0f, 180f)] private float _maxYawAngle = 60f;
+        [SerializeField, Min(0f)] private float _elevationSpeed = 0.15f;
+        [SerializeField, Range(-90f, 0f)] private float _minElevationAngle = -15f;
+        [SerializeField, Range(0f, 90f)] private float _maxElevationAngle = 45f;
 
         [Header("Shot")]
         [SerializeField, Min(0f)] private float _shotPower = 15f;
@@ -24,6 +27,9 @@ namespace Features.WeaponModule.Scripts
         public GameObject TurretPrefab => _turretPrefab;
         public float RotationSpeed => _rotationSpeed;
         public float MaxYawAngle => _maxYawAngle;
+        public float ElevationSpeed => _elevationSpeed;
+        public float MinElevationAngle => _minElevationAngle;
+        public float MaxElevationAngle => _maxElevationAngle;
         public float ShotPower => _shotPower;
         public float MinShotPower => _minShotPower;
         public float MaxShotPower => _maxShotPower;

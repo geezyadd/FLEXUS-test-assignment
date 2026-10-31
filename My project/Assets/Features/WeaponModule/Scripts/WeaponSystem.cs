@@ -50,8 +50,20 @@ namespace Features.WeaponModule.Scripts
 
         private void OnUpdated(float _)
         {
+            RotateWeapon();
+            ElevateWeapon();
+        }
+
+        private void RotateWeapon()
+        {
             if (_weaponService.TryGetCapability(out IRotatable rotatable))
                 rotatable.Rotate(_input.RotationDelta.x);
+        }
+
+        private void ElevateWeapon()
+        {
+            if (_weaponService.TryGetCapability(out IElevatable elevatable))
+                elevatable.Elevate(_input.RotationDelta.y);
         }
 
         private void OnTrajectoryChanged(float direction)

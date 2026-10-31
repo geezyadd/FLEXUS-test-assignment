@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotator: {fileID: 100003}
+  _elevator: {fileID: 100023}
   _powerRegulator: {fileID: 100006}
   _shooter: {fileID: 100005}
 --- !u!114 &100005
@@ -130,6 +131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 100022}
+  - component: {fileID: 100023}
   m_Layer: 0
   m_Name: BarrelPivot
   m_TagString: Untagged
@@ -154,6 +156,18 @@ Transform:
   - {fileID: 100042}
   m_Father: {fileID: 100012}
   m_LocalEulerAnglesHint: {x: -18.076, y: 0, z: 0}
+--- !u!114 &100023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96b287ab1a94034ae9776ad93e92510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &100031
 GameObject:
   m_ObjectHideFlags: 0
