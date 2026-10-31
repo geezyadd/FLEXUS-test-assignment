@@ -1,4 +1,5 @@
 using Features.AssetLoaderModule.Scripts;
+using Features.MeshGenerationModule.Scripts;
 using Features.PhysicsModule.Scripts;
 using Features.WeaponModule.Scripts;
 using Plugins.Zenject.Addons.AddressablesConfigurationsLoader;
@@ -12,6 +13,7 @@ namespace Core.Data.Scripts
         {
             Container.BindConfigurationFromAddressables<PhysicsConfiguration>(Address.Configurations.PhysicsConfiguration).AsSingle();
             Container.BindConfigurationFromAddressables<WeaponConfiguration>(Address.Configurations.WeaponConfiguration).AsSingle();
+            Container.BindConfigurationFromAddressables<MeshGenerationConfiguration>(Address.Configurations.MeshGenerationConfiguration).AsSingle();
         }
     }
 }

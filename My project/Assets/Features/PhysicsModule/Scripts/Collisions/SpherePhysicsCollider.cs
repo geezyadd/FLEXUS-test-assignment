@@ -15,6 +15,9 @@ namespace Features.PhysicsModule.Scripts.Collisions
             }
         }
 
+        public void SetRadius(float radius) =>
+            _radius = Mathf.Max(0f, radius);
+
         protected override bool CastShape(Vector3 center, Vector3 direction, float distance, out RaycastHit hit) =>
             Physics.SphereCast(center, WorldRadius, direction, out hit, distance,
                 CollisionMask, QueryTriggerInteraction.Ignore);

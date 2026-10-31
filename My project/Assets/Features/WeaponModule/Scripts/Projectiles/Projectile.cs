@@ -1,5 +1,7 @@
 using System;
+using Features.MeshGenerationModule.Scripts;
 using Features.PhysicsModule.Scripts;
+using Features.PhysicsModule.Scripts.Collisions;
 using UnityEngine;
 
 namespace Features.WeaponModule.Scripts.Projectiles
@@ -7,6 +9,8 @@ namespace Features.WeaponModule.Scripts.Projectiles
     public class Projectile : MonoBehaviour, IPoolableProjectile
     {
         [SerializeField] private PhysicsBody _body;
+        [SerializeField] private RandomSphereMeshGenerator _meshGenerator;
+        [SerializeField] private SpherePhysicsCollider _collider;
 
         private float _lifetimeLeft;
 
@@ -35,5 +39,8 @@ namespace Features.WeaponModule.Scripts.Projectiles
             if (_lifetimeLeft <= 0f)
                 Released?.Invoke(this);
         }
+
+        private void Awake() =>
+            _collider.SetRadius(_meshGenerator.BoundingRadius);
     }
 }

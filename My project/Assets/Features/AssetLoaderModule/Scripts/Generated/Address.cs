@@ -4,6 +4,7 @@ namespace Features.AssetLoaderModule.Scripts
     {
         public static class Configurations
         {
+            public const string MeshGenerationConfiguration = "MeshGenerationConfiguration";
             public const string PhysicsConfiguration = "PhysicsConfiguration";
             public const string WeaponConfiguration = "WeaponConfiguration";
         }

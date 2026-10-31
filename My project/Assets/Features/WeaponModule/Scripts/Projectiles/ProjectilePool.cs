@@ -71,6 +71,7 @@ namespace Features.WeaponModule.Scripts.Projectiles
         private IPoolableProjectile Create()
         {
             IPoolableProjectile projectile = _factory.Create(_root);
+            projectile.OnDespawned();
             projectile.Released += Return;
             _projectiles.Add(projectile);
             return projectile;
