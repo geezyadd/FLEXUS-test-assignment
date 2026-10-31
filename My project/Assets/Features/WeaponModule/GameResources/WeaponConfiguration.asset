@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: WeaponConfiguration
   m_EditorClassIdentifier: 
   _turretPrefab: {fileID: 100001, guid: c0917ae968dda70d326e42418a97d0d3, type: 3}
-  _rotationSpeed: 0.15
+  _rotationSpeed: 0.075
   _maxYawAngle: 60
-  _elevationSpeed: 0.15
+  _elevationSpeed: 0.075
   _minElevationAngle: -15
   _maxElevationAngle: 45
   _shotPower: 15

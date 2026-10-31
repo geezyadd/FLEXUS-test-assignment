@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Configurations
   m_GUID: c1b6867b5f1282a4e89fbcac1031cf1b
   m_SerializeEntries:
+  - m_GUID: fca1d303fb7c4b25b5668442f38d84fc
+    m_Address: CameraConfiguration
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d67eadf5a9ddf38bd604379a4f36e1ce
     m_Address: MeshGenerationConfiguration
     m_ReadOnly: 0

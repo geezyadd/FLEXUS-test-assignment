@@ -1,4 +1,5 @@
 using Features.AssetLoaderModule.Scripts;
+using Features.CameraModule.Scripts;
 using Features.MeshGenerationModule.Scripts;
 using Features.PhysicsModule.Scripts;
 using Features.WeaponModule.Scripts;
@@ -14,6 +15,7 @@ namespace Core.Data.Scripts
             Container.BindConfigurationFromAddressables<PhysicsConfiguration>(Address.Configurations.PhysicsConfiguration).AsSingle();
             Container.BindConfigurationFromAddressables<WeaponConfiguration>(Address.Configurations.WeaponConfiguration).AsSingle();
             Container.BindConfigurationFromAddressables<MeshGenerationConfiguration>(Address.Configurations.MeshGenerationConfiguration).AsSingle();
+            Container.BindConfigurationFromAddressables<CameraConfiguration>(Address.Configurations.CameraConfiguration).AsSingle();
         }
     }
 }
