@@ -1,3 +1,4 @@
+using Features.WeaponModule.Scripts;
 using Zenject;
 
 namespace Core.Data.Scripts
@@ -6,7 +7,8 @@ namespace Core.Data.Scripts
     {
         public override void InstallBindings()
         {
-            
+            Container.Bind<WeaponModel>().AsSingle();
+            Container.Bind<WeaponSpawnPointModel>().AsSingle();
         }
     }
 }

@@ -1,4 +1,5 @@
 using Features.PhysicsModule.Scripts;
+using Features.WeaponModule.Scripts;
 using Zenject;
 
 namespace Core.Contexts.Game.Scripts
@@ -8,6 +9,7 @@ namespace Core.Contexts.Game.Scripts
         public override void InstallBindings()
         {
             PhysicsInstaller.Install(Container);
+            WeaponInstaller.Install(Container);
         }
     }
 }

@@ -26,7 +26,8 @@ namespace Features.PhysicsModule.Scripts.Collisions
             if (TryFindFirstHit(body, direction, distance, out IPhysicsCollider collider, out RaycastHit hit) == false)
                 return false;
 
-            hit.normal = GetSurfaceNormal(hit);
+            Vector3 shapeCenterAtHit = body.Position + collider.WorldCenterOffset + direction * hit.distance;
+            hit.normal = GetSurfaceNormal(hit, shapeCenterAtHit);
 
             CollisionMaterial material = collider.Material != null ? collider.Material : _configuration.DefaultMaterial;
             float impactSpeed = -Vector3.Dot(body.Velocity, hit.normal);
@@ -65,11 +66,17 @@ namespace Features.PhysicsModule.Scripts.Collisions
             return firstCollider != null;
         }
 
-        private Vector3 GetSurfaceNormal(RaycastHit hit)
+        private Vector3 GetSurfaceNormal(RaycastHit hit, Vector3 bodyCenterAtHit)
         {
-            Ray ray = new(hit.point + hit.normal * NormalProbeDistance, -hit.normal);
+            Vector3 toPoint = hit.point - bodyCenterAtHit;
+            float distance = toPoint.magnitude;
 
-            return hit.collider.Raycast(ray, out RaycastHit surfaceHit, NormalProbeDistance * 2f)
+            if (distance < MinMoveDistance)
+                return hit.normal;
+
+            Ray ray = new(bodyCenterAtHit, toPoint / distance);
+
+            return hit.collider.Raycast(ray, out RaycastHit surfaceHit, distance + NormalProbeDistance)
                 ? surfaceHit.normal
                 : hit.normal;
         }

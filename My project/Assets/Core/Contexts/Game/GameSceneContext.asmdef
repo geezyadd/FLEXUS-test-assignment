@@ -3,7 +3,8 @@
     "rootNamespace": "Core.Contexts.Game",
     "references": [
         "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
-        "GUID:d28170c3d6ba3b763ce661f286cceeea"
+        "GUID:d28170c3d6ba3b763ce661f286cceeea",
+        "GUID:f39cc313c7fd307ea3f97c0e6da14557"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
