@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Configurations
   m_GUID: c1b6867b5f1282a4e89fbcac1031cf1b
   m_SerializeEntries:
+  - m_GUID: b73ba16e32b647a693714070499fb829
+    m_Address: ScreenShakeConfiguration
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fca1d303fb7c4b25b5668442f38d84fc
     m_Address: CameraConfiguration
     m_ReadOnly: 0

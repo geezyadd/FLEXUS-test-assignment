@@ -1,4 +1,5 @@
 using Features.CameraModule.Scripts;
+using Features.ScreenShakeModule.Scripts;
 using Features.WeaponModule.Scripts;
 using Zenject;
 
@@ -11,6 +12,7 @@ namespace Core.Data.Scripts
             Container.Bind<WeaponModel>().AsSingle();
             Container.Bind<WeaponSpawnPointModel>().AsSingle();
             Container.Bind<CameraModel>().AsSingle();
+            Container.Bind<ScreenShakeModel>().AsSingle();
         }
     }
 }
