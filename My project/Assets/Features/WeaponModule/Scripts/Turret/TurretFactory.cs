@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Features.WeaponModule.Scripts.Turret
 {
-    public class TurretFactory
+    public class TurretFactory : IWeaponFactory
     {
         private readonly DiContainer _container;
         private readonly WeaponConfiguration _configuration;

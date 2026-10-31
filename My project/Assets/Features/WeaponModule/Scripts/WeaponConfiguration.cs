@@ -1,4 +1,4 @@
-using Features.PhysicsModule.Scripts;
+using Features.WeaponModule.Scripts.Projectiles;
 using UnityEngine;
 
 namespace Features.WeaponModule.Scripts
@@ -16,8 +16,10 @@ namespace Features.WeaponModule.Scripts
         [SerializeField, Min(0f)] private float _minShotPower = 5f;
         [SerializeField, Min(0f)] private float _maxShotPower = 30f;
         [SerializeField, Min(0f)] private float _shotPowerStep = 1f;
-        [SerializeField] private PhysicsBody _projectilePrefab;
+        [SerializeField] private Projectile _projectilePrefab;
         [SerializeField, Min(0f)] private float _projectileLifetime = 5f;
+        [SerializeField, Min(0)] private int _projectilePoolSize = 20;
+        [SerializeField, Min(1)] private int _projectilePoolMaxSize = 100;
 
         public GameObject TurretPrefab => _turretPrefab;
         public float RotationSpeed => _rotationSpeed;
@@ -26,14 +28,17 @@ namespace Features.WeaponModule.Scripts
         public float MinShotPower => _minShotPower;
         public float MaxShotPower => _maxShotPower;
         public float ShotPowerStep => _shotPowerStep;
-        public PhysicsBody ProjectilePrefab => _projectilePrefab;
+        public Projectile ProjectilePrefab => _projectilePrefab;
         public float ProjectileLifetime => _projectileLifetime;
+        public int ProjectilePoolSize => _projectilePoolSize;
+        public int ProjectilePoolMaxSize => _projectilePoolMaxSize;
 
 #if UNITY_EDITOR
         private void OnValidate()
         {
             _maxShotPower = Mathf.Max(_maxShotPower, _minShotPower);
             _shotPower = Mathf.Clamp(_shotPower, _minShotPower, _maxShotPower);
+            _projectilePoolMaxSize = Mathf.Max(_projectilePoolMaxSize, _projectilePoolSize);
         }
 #endif
     }

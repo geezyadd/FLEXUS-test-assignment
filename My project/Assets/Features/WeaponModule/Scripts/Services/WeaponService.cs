@@ -1,5 +1,4 @@
 using Features.WeaponModule.Scripts.Services.Exceptions;
-using Features.WeaponModule.Scripts.Turret;
 using UnityEngine;
 
 namespace Features.WeaponModule.Scripts.Services
@@ -7,9 +6,9 @@ namespace Features.WeaponModule.Scripts.Services
     public class WeaponService : IWeaponService
     {
         private readonly WeaponModel _model;
-        private readonly TurretFactory _factory;
+        private readonly IWeaponFactory _factory;
 
-        public WeaponService(WeaponModel model, TurretFactory factory)
+        public WeaponService(WeaponModel model, IWeaponFactory factory)
         {
             _model = model;
             _factory = factory;
@@ -22,15 +21,18 @@ namespace Features.WeaponModule.Scripts.Services
 
         public void Equip(Vector3 position, Quaternion rotation)
         {
-            Unequip();
+            DespawnCurrent();
             _model.SetCurrent(_factory.Create(position, rotation));
         }
 
         public void Unequip()
         {
-            Current?.Despawn();
+            DespawnCurrent();
             _model.SetCurrent(null);
         }
+
+        private void DespawnCurrent() =>
+            Current?.Despawn();
 
         public IWeapon GetWeapon() =>
             Current ?? throw new NoWeaponEquippedException();

@@ -19,5 +19,7 @@ MonoBehaviour:
   _minShotPower: 5
   _maxShotPower: 30
   _shotPowerStep: 1
-  _projectilePrefab: {fileID: 6689660028345216799, guid: 33f46c888932cb44bae1808662c48814, type: 3}
+  _projectilePrefab: {fileID: 7314925460189734412, guid: 33f46c888932cb44bae1808662c48814, type: 3}
   _projectileLifetime: 5
+  _projectilePoolSize: 20
+  _projectilePoolMaxSize: 100
