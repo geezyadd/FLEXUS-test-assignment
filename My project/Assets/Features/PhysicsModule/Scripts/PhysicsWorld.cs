@@ -1,0 +1,99 @@
+using System;
+using System.Collections.Generic;
+using Features.GameUpdaterModule.Scripts;
+using Features.PhysicsModule.Scripts.Smoothing;
+using UnityEngine;
+using Zenject;
+
+namespace Features.PhysicsModule.Scripts
+{
+    public class PhysicsWorld : IPhysicsWorld, IInitializable, IDisposable
+    {
+        private readonly IGameUpdater _updater;
+        private readonly List<IPhysicsForce> _forces;
+        private readonly Dictionary<PhysicsSmoothing, ISmoothingStrategy> _strategies = new();
+        private readonly List<IPhysicsBody> _bodies = new();
+        private readonly Dictionary<IPhysicsBody, int> _indices = new();
+
+        public PhysicsWorld(IGameUpdater updater, List<IPhysicsForce> forces, List<ISmoothingStrategy> strategies)
+        {
+            _updater = updater;
+            _forces = forces;
+
+            foreach (ISmoothingStrategy strategy in strategies)
+                _strategies.Add(strategy.Mode, strategy);
+        }
+
+        public void Initialize()
+        {
+            _updater.FixedUpdated += OnFixedUpdated;
+            _updater.Updated += OnUpdated;
+        }
+
+        public void Dispose()
+        {
+            _updater.FixedUpdated -= OnFixedUpdated;
+            _updater.Updated -= OnUpdated;
+        }
+
+        public void Register(IPhysicsBody body)
+        {
+            if (_indices.ContainsKey(body))
+                return;
+
+            _indices[body] = _bodies.Count;
+            _bodies.Add(body);
+        }
+
+        public void Unregister(IPhysicsBody body)
+        {
+            if (_indices.Remove(body, out int index) == false)
+                return;
+
+            int lastIndex = _bodies.Count - 1;
+
+            if (index != lastIndex)
+            {
+                IPhysicsBody lastBody = _bodies[lastIndex];
+                _bodies[index] = lastBody;
+                _indices[lastBody] = index;
+            }
+
+            _bodies.RemoveAt(lastIndex);
+        }
+
+        private void OnFixedUpdated(float fixedDeltaTime)
+        {
+            for (int i = _bodies.Count - 1; i >= 0; i--)
+                Simulate(_bodies[i], fixedDeltaTime);
+        }
+
+        private void OnUpdated(float _)
+        {
+            float timeSinceStep = Time.time - Time.fixedTime;
+            float fixedDeltaTime = Time.fixedDeltaTime;
+
+            for (int i = _bodies.Count - 1; i >= 0; i--)
+            {
+                IPhysicsBody body = _bodies[i];
+                if (_strategies.TryGetValue(body.Smoothing, out ISmoothingStrategy strategy) == false)
+                    throw new InvalidOperationException($"No smoothing strategy bound for {body.Smoothing}.");
+
+                body.ApplyPose(strategy.Evaluate(body, timeSinceStep, fixedDeltaTime));
+            }
+        }
+
+        private void Simulate(IPhysicsBody body, float deltaTime)
+        {
+            Vector3 velocity = body.Velocity;
+
+            foreach (IPhysicsForce force in _forces)
+                velocity += force.GetForce(body) * deltaTime;
+
+            velocity *= 1f - Mathf.Min(1f, body.Drag * deltaTime);
+
+            body.Velocity = velocity;
+            body.MovePosition(body.Position + velocity * deltaTime);
+        }
+    }
+}

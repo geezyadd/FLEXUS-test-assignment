@@ -1,4 +1,5 @@
 using Core.Data.Scripts;
+using Features.GameUpdaterModule.Scripts;
 using Zenject;
 
 namespace Core.Contexts.Global.Scripts
@@ -9,6 +10,7 @@ namespace Core.Contexts.Global.Scripts
         {
             ConfigurationInstaller.Install(Container);
             DataInstaller.Install(Container);
+            GameUpdaterInstaller.Install(Container);
         }
     }
 }

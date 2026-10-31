@@ -1,3 +1,4 @@
+using Features.PhysicsModule.Scripts;
 using Zenject;
 
 namespace Core.Contexts.Game.Scripts
@@ -6,6 +7,7 @@ namespace Core.Contexts.Game.Scripts
     {
         public override void InstallBindings()
         {
+            PhysicsInstaller.Install(Container);
         }
     }
 }
