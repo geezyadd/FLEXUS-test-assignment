@@ -10,6 +10,7 @@ namespace Features.WeaponModule.Scripts.Turret
         [SerializeField] private ShotPowerRegulator _powerRegulator;
         [SerializeField] private TurretShooter _shooter;
 
+        public event Action Fired;
         public event Action<float> PowerChanged;
 
         public float Power => _powerRegulator.Power;
@@ -20,8 +21,11 @@ namespace Features.WeaponModule.Scripts.Turret
         private void OnDisable() =>
             _powerRegulator.PowerChanged -= OnPowerChanged;
 
-        public void Fire() =>
+        public void Fire()
+        {
             _shooter.Fire();
+            Fired?.Invoke();
+        }
 
         public void Despawn() =>
             Destroy(gameObject);
