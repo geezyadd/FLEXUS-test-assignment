@@ -9,8 +9,8 @@ namespace Features.WeaponModule.Scripts.Projectiles
     public class Projectile : MonoBehaviour, IPoolableProjectile
     {
         [SerializeField] private PhysicsBody _body;
-        [SerializeField] private RandomSphereMeshGenerator _meshGenerator;
-        [SerializeField] private SpherePhysicsCollider _collider;
+        [SerializeField] private RandomCubeMeshGenerator _meshGenerator;
+        [SerializeField] private BoxPhysicsCollider _collider;
 
         private float _lifetimeLeft;
 
@@ -41,6 +41,6 @@ namespace Features.WeaponModule.Scripts.Projectiles
         }
 
         private void Awake() =>
-            _collider.SetRadius(_meshGenerator.BoundingRadius);
+            _collider.SetHalfExtents(_meshGenerator.HalfExtents);
     }
 }

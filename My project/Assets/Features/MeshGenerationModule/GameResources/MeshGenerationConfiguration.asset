@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65085511723b4e8dfcd870f0acfc24a6, type: 3}
   m_Name: MeshGenerationConfiguration
   m_EditorClassIdentifier: 
-  _radius: 0.5
-  _noise: 0.35
-  _latitudeSegments: 4
-  _longitudeSegments: 6
+  _size: 1
+  _noise: 0.25

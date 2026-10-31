@@ -4,13 +4,23 @@ using Zenject;
 
 namespace Features.MeshGenerationModule.Scripts
 {
-    public class RandomSphereMeshGenerator : MonoBehaviour
+    public class RandomCubeMeshGenerator : MonoBehaviour
     {
+        private static readonly int[][] Faces =
+        {
+            new[] { 0, 2, 6, 4 },
+            new[] { 1, 3, 7, 5 },
+            new[] { 0, 1, 5, 4 },
+            new[] { 2, 3, 7, 6 },
+            new[] { 0, 1, 3, 2 },
+            new[] { 4, 5, 7, 6 }
+        };
+
         [SerializeField] private MeshFilter _meshFilter;
 
         private MeshGenerationConfiguration _configuration;
         private Mesh _mesh;
-        private float _boundingRadius;
+        private Vector3 _halfExtents;
 
         public Mesh Mesh
         {
@@ -21,12 +31,12 @@ namespace Features.MeshGenerationModule.Scripts
             }
         }
 
-        public float BoundingRadius
+        public Vector3 HalfExtents
         {
             get
             {
                 EnsureGenerated();
-                return _boundingRadius;
+                return _halfExtents;
             }
         }
 
@@ -53,58 +63,41 @@ namespace Features.MeshGenerationModule.Scripts
 
         private Mesh Generate()
         {
-            int latitude = _configuration.LatitudeSegments;
-            int longitude = _configuration.LongitudeSegments;
-
-            Vector3 northPole = RandomPoint(Vector3.up);
-            Vector3 southPole = RandomPoint(Vector3.down);
-            Vector3[,] rings = CreateRings(latitude, longitude);
-
+            Vector3[] corners = CreateCorners();
             List<Vector3> vertices = new();
 
-            for (int lon = 0; lon < longitude; lon++)
+            foreach (int[] face in Faces)
             {
-                int next = (lon + 1) % longitude;
+                Vector3 a = corners[face[0]];
+                Vector3 b = corners[face[1]];
+                Vector3 c = corners[face[2]];
+                Vector3 d = corners[face[3]];
 
-                AddTriangle(vertices, northPole, rings[0, lon], rings[0, next]);
-                AddTriangle(vertices, southPole, rings[latitude - 2, next], rings[latitude - 2, lon]);
-
-                for (int lat = 0; lat < latitude - 2; lat++)
-                {
-                    AddTriangle(vertices, rings[lat, lon], rings[lat + 1, lon], rings[lat + 1, next]);
-                    AddTriangle(vertices, rings[lat, lon], rings[lat + 1, next], rings[lat, next]);
-                }
+                AddTriangle(vertices, a, b, c);
+                AddTriangle(vertices, a, c, d);
             }
 
             return BuildMesh(vertices);
         }
 
-        private Vector3[,] CreateRings(int latitude, int longitude)
+        private Vector3[] CreateCorners()
         {
-            Vector3[,] rings = new Vector3[latitude - 1, longitude];
+            float halfSize = _configuration.Size * 0.5f;
+            Vector3[] corners = new Vector3[8];
 
-            for (int lat = 1; lat < latitude; lat++)
+            for (int i = 0; i < corners.Length; i++)
             {
-                float theta = Mathf.PI * lat / latitude;
-
-                for (int lon = 0; lon < longitude; lon++)
-                {
-                    float phi = 2f * Mathf.PI * lon / longitude;
-                    Vector3 direction = new(Mathf.Sin(theta) * Mathf.Cos(phi), Mathf.Cos(theta), Mathf.Sin(theta) * Mathf.Sin(phi));
-                    rings[lat - 1, lon] = RandomPoint(direction);
-                }
+                Vector3 direction = new((i & 1) == 0 ? -1f : 1f, (i & 2) == 0 ? -1f : 1f, (i & 4) == 0 ? -1f : 1f);
+                Vector3 offset = Random.insideUnitSphere * (halfSize * _configuration.Noise);
+                corners[i] = direction * halfSize + offset;
+                _halfExtents = Vector3.Max(_halfExtents, Abs(corners[i]));
             }
 
-            return rings;
+            return corners;
         }
 
-        private Vector3 RandomPoint(Vector3 direction)
-        {
-            float noise = _configuration.Noise;
-            float distance = _configuration.Radius * Random.Range(1f - noise, 1f + noise);
-            _boundingRadius = Mathf.Max(_boundingRadius, distance);
-            return direction * distance;
-        }
+        private Vector3 Abs(Vector3 vector) =>
+            new(Mathf.Abs(vector.x), Mathf.Abs(vector.y), Mathf.Abs(vector.z));
 
         private void AddTriangle(List<Vector3> vertices, Vector3 a, Vector3 b, Vector3 c)
         {
@@ -132,7 +125,7 @@ namespace Features.MeshGenerationModule.Scripts
             for (int i = 0; i < triangles.Length; i++)
                 triangles[i] = i;
 
-            Mesh mesh = new() { name = "RandomSphereMesh" };
+            Mesh mesh = new() { name = "RandomCubeMesh" };
             mesh.SetVertices(vertices);
             mesh.SetTriangles(triangles, 0);
             mesh.RecalculateNormals();

@@ -15,6 +15,9 @@ namespace Features.PhysicsModule.Scripts.Collisions
             }
         }
 
+        public void SetHalfExtents(Vector3 halfExtents) =>
+            _halfExtents = Vector3.Max(Vector3.zero, halfExtents);
+
         protected override bool CastShape(Vector3 center, Vector3 direction, float distance, out RaycastHit hit) =>
             Physics.BoxCast(center, WorldHalfExtents, direction, out hit, transform.rotation, distance,
                 CollisionMask, QueryTriggerInteraction.Ignore);
