@@ -7,6 +7,8 @@ namespace Features.InputModule.Scripts
     {
         event Action Fired;
         event Action<float> TrajectoryChanged;
+        event Action CursorLockRequested;
+        event Action CursorUnlockRequested;
 
         Vector2 RotationDelta { get; }
 

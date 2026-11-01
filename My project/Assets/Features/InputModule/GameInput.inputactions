@@ -68,6 +68,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Cursor",
+            "id": "d4554e06-995d-4896-b44b-d33e9339fcf0",
+            "actions": [
+                {
+                    "name": "Lock",
+                    "type": "Button",
+                    "id": "0e5ba342-7255-44d7-91bc-fb24b7632e6d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Unlock",
+                    "type": "Button",
+                    "id": "8659eae0-a90d-48a6-95c9-bf4d346c05af",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ca4e8c45-0ecc-4248-85d1-22748b02fc89",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Lock",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7d30afdb-e428-4616-a482-7dfcb418b146",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Unlock",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

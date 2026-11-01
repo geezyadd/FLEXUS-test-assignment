@@ -1,0 +1,19 @@
+{
+    "name": "CursorModule",
+    "rootNamespace": "Features.CursorModule",
+    "references": [
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
+        "GUID:5daa2e4d529d1cc0d302305de452a998",
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:4ee86c7add344bff931cead7f7f16525"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

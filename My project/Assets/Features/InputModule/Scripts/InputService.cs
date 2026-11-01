@@ -11,6 +11,8 @@ namespace Features.InputModule.Scripts
 
         public event Action Fired;
         public event Action<float> TrajectoryChanged;
+        public event Action CursorLockRequested;
+        public event Action CursorUnlockRequested;
 
         public Vector2 RotationDelta =>
             _input.Turret.Rotate.ReadValue<Vector2>();
@@ -19,14 +21,20 @@ namespace Features.InputModule.Scripts
         {
             _input.Turret.Fire.performed += OnFirePerformed;
             _input.Turret.Trajectory.performed += OnTrajectoryPerformed;
+            _input.Cursor.Lock.performed += OnCursorLockPerformed;
+            _input.Cursor.Unlock.performed += OnCursorUnlockPerformed;
+            _input.Cursor.Enable();
             Enable();
         }
 
         public void Dispose()
         {
             Disable();
+            _input.Cursor.Disable();
             _input.Turret.Fire.performed -= OnFirePerformed;
             _input.Turret.Trajectory.performed -= OnTrajectoryPerformed;
+            _input.Cursor.Lock.performed -= OnCursorLockPerformed;
+            _input.Cursor.Unlock.performed -= OnCursorUnlockPerformed;
             _input.Dispose();
         }
 
@@ -46,5 +54,11 @@ namespace Features.InputModule.Scripts
             if (scroll != 0f)
                 TrajectoryChanged?.Invoke(Mathf.Sign(scroll));
         }
+
+        private void OnCursorLockPerformed(InputAction.CallbackContext context) =>
+            CursorLockRequested?.Invoke();
+
+        private void OnCursorUnlockPerformed(InputAction.CallbackContext context) =>
+            CursorUnlockRequested?.Invoke();
     }
 }

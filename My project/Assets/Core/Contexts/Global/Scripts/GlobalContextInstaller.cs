@@ -1,5 +1,6 @@
 using Core.Data.Scripts;
 using Features.AudioModule.Scripts;
+using Features.CursorModule.Scripts;
 using Features.GameUpdaterModule.Scripts;
 using Zenject;
 
@@ -13,6 +14,7 @@ namespace Core.Contexts.Global.Scripts
             DataInstaller.Install(Container);
             GameUpdaterInstaller.Install(Container);
             AudioInstaller.Install(Container);
+            CursorInstaller.Install(Container);
         }
     }
 }
