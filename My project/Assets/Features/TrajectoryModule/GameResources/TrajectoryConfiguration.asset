@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dde2707d59d4b23a274bfeb7a0d783c, type: 3}
   m_Name: TrajectoryConfiguration
   m_EditorClassIdentifier:
-  _pointsCount: 75
+  _pointsCount: 200
