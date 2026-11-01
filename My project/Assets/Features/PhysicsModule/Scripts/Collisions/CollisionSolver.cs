@@ -28,6 +28,7 @@ namespace Features.PhysicsModule.Scripts.Collisions
 
             Vector3 shapeCenterAtHit = body.Position + collider.WorldCenterOffset + direction * hit.distance;
             hit.normal = GetSurfaceNormal(hit, shapeCenterAtHit);
+            hit.point = GetPointUnderCenter(hit, shapeCenterAtHit);
 
             CollisionMaterial material = collider.Material != null ? collider.Material : _configuration.DefaultMaterial;
             float impactSpeed = -Vector3.Dot(body.Velocity, hit.normal);
@@ -80,6 +81,9 @@ namespace Features.PhysicsModule.Scripts.Collisions
                 ? surfaceHit.normal
                 : hit.normal;
         }
+
+        private Vector3 GetPointUnderCenter(RaycastHit hit, Vector3 center) =>
+            center - hit.normal * Vector3.Dot(center - hit.point, hit.normal);
 
         private Vector3 ResolveCollisionVelocity(Vector3 velocity, Vector3 normal, CollisionMaterial material)
         {
