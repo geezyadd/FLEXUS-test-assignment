@@ -6,8 +6,9 @@ Shader "Hidden/ImpactDecalStamp"
         _DecalTex ("Decal Texture", 2D) = "white" {}
         _DecalColor ("Decal Color", Color) = (0, 0, 0, 1)
         _DecalUV ("Decal UV", Vector) = (0.5, 0.5, 0, 0)
-        _DecalSize ("Decal Size", Float) = 0.05
+        _DecalSize ("Decal Size", Float) = 0.5
         _DecalRotation ("Decal Rotation", Float) = 0
+        _SurfaceSize ("Surface Size", Vector) = (10, 10, 0, 0)
     }
 
     SubShader
@@ -29,10 +30,11 @@ Shader "Hidden/ImpactDecalStamp"
             float4 _DecalUV;
             float _DecalSize;
             float _DecalRotation;
+            float4 _SurfaceSize;
 
             float2 GetDecalUV(float2 uv)
             {
-                float2 offset = uv - _DecalUV.xy;
+                float2 offset = (uv - _DecalUV.xy) * _SurfaceSize.xy;
                 float sinRotation;
                 float cosRotation;
                 sincos(_DecalRotation, sinRotation, cosRotation);

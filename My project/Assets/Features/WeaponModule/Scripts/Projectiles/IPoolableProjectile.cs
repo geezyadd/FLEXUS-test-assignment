@@ -1,5 +1,6 @@
 using System;
 using Features.PhysicsModule.Scripts;
+using UnityEngine;
 
 namespace Features.WeaponModule.Scripts.Projectiles
 {
@@ -10,7 +11,7 @@ namespace Features.WeaponModule.Scripts.Projectiles
         IPhysicsBody Body { get; }
         bool IsActive { get; }
 
-        void OnSpawned(float lifetime, int maxRicochets);
+        void OnSpawned(Vector3 position, Vector3 velocity, float lifetime, int maxRicochets);
         void OnDespawned();
         void Tick(float deltaTime);
     }

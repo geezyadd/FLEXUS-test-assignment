@@ -11,6 +11,7 @@ namespace Features.AssetLoaderModule.Scripts
             public const string PowerWindowConfiguration = "PowerWindowConfiguration";
             public const string ScreenShakeConfiguration = "ScreenShakeConfiguration";
             public const string TrajectoryConfiguration = "TrajectoryConfiguration";
+            public const string VfxConfiguration = "VfxConfiguration";
             public const string WeaponConfiguration = "WeaponConfiguration";
         }
 

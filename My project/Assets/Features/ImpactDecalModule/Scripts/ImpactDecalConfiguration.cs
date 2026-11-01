@@ -8,16 +8,18 @@ namespace Features.ImpactDecalModule.Scripts
         [SerializeField] private Shader _stampShader;
         [SerializeField] private Texture2D _texture;
         [SerializeField] private string _decalMapProperty = "_decalMap";
-        [SerializeField, Min(16)] private int _textureSize = 1024;
+        [SerializeField, Min(1f)] private float _pixelsPerMeter = 150f;
+        [SerializeField, Min(64)] private int _maxTextureSize = 2048;
         [SerializeField] private Color _color = Color.white;
-        [SerializeField, Range(0.001f, 0.5f)] private float _minSize = 0.02f;
-        [SerializeField, Range(0.001f, 0.5f)] private float _maxSize = 0.04f;
+        [SerializeField, Min(0.01f)] private float _minSize = 0.6f;
+        [SerializeField, Min(0.01f)] private float _maxSize = 1.4f;
         [SerializeField, Min(0.001f)] private float _surfaceProbeDistance = 0.1f;
 
         public Shader StampShader => _stampShader;
         public Texture2D Texture => _texture;
         public string DecalMapProperty => _decalMapProperty;
-        public int TextureSize => _textureSize;
+        public float PixelsPerMeter => _pixelsPerMeter;
+        public int MaxTextureSize => _maxTextureSize;
         public Color Color => _color;
         public float MinSize => _minSize;
         public float MaxSize => _maxSize;

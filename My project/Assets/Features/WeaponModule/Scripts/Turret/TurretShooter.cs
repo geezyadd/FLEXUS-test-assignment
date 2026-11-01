@@ -1,4 +1,3 @@
-using Features.PhysicsModule.Scripts;
 using Features.WeaponModule.Scripts.Projectiles;
 using UnityEngine;
 using Zenject;
@@ -18,11 +17,7 @@ namespace Features.WeaponModule.Scripts.Turret
         [Inject]
         private void InjectDependencies(IProjectileSpawner projectileSpawner) => _projectileSpawner = projectileSpawner;
 
-        public void Fire()
-        {
-            IPhysicsBody projectile = _projectileSpawner.Spawn();
-            projectile.Teleport(LaunchPosition);
-            projectile.Velocity = LaunchVelocity;
-        }
+        public void Fire() =>
+            _projectileSpawner.Spawn(LaunchPosition, LaunchVelocity);
     }
 }

@@ -1,9 +1,9 @@
-using Features.PhysicsModule.Scripts;
+using UnityEngine;
 
 namespace Features.WeaponModule.Scripts.Projectiles
 {
     public interface IProjectileSpawner
     {
-        IPhysicsBody Spawn();
+        void Spawn(Vector3 position, Vector3 velocity);
     }
 }

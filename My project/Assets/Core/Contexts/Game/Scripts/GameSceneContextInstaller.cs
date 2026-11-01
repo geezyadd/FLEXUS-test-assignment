@@ -5,6 +5,7 @@ using Features.ScreenShakeModule.Scripts;
 using Features.TrajectoryModule.Scripts;
 using Features.UIModule.PowerWindow.Scripts;
 using Features.UIModule.Scripts;
+using Features.VfxModule.Scripts;
 using Features.WeaponModule.Scripts;
 using Zenject;
 
@@ -22,6 +23,7 @@ namespace Core.Contexts.Game.Scripts
             ImpactDecalInstaller.Install(Container);
             UIInstaller.Install(Container);
             PowerWindowInstaller.Install(Container);
+            VfxInstaller.Install(Container);
         }
     }
 }

@@ -15,8 +15,9 @@ MonoBehaviour:
   _stampShader: {fileID: 4800000, guid: a77440de595cfed4a842c630996a909e, type: 3}
   _texture: {fileID: 2800000, guid: d5ad1475f73b18949942eadbec00e915, type: 3}
   _decalMapProperty: _decalMap
-  _textureSize: 2048
+  _pixelsPerMeter: 150
+  _maxTextureSize: 2048
   _color: {r: 0, g: 0, b: 0, a: 1}
-  _minSize: 0.02
-  _maxSize: 0.04
+  _minSize: 0.6
+  _maxSize: 1.4
   _surfaceProbeDistance: 0.1

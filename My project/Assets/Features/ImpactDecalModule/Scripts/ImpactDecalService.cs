@@ -12,6 +12,7 @@ namespace Features.ImpactDecalModule.Scripts
         private static readonly int DecalUVId = Shader.PropertyToID("_DecalUV");
         private static readonly int DecalSizeId = Shader.PropertyToID("_DecalSize");
         private static readonly int DecalRotationId = Shader.PropertyToID("_DecalRotation");
+        private static readonly int SurfaceSizeId = Shader.PropertyToID("_SurfaceSize");
 
         private readonly ImpactDecalConfiguration _configuration;
         private Material _stampMaterial;
@@ -33,7 +34,7 @@ namespace Features.ImpactDecalModule.Scripts
             if (TryGetSurfaceUV(hit, out Vector2 uv) == false)
                 return;
 
-            surface.Paint(PrepareStamp(uv));
+            surface.Paint(PrepareStamp(uv, surface.WorldSize));
         }
 
         private bool TryGetSurfaceUV(RaycastHit hit, out Vector2 uv)
@@ -46,7 +47,7 @@ namespace Features.ImpactDecalModule.Scripts
             return isHit;
         }
 
-        private Material PrepareStamp(Vector2 uv)
+        private Material PrepareStamp(Vector2 uv, Vector2 surfaceSize)
         {
             if (_stampMaterial == null)
                 _stampMaterial = new Material(_configuration.StampShader);
@@ -54,7 +55,8 @@ namespace Features.ImpactDecalModule.Scripts
             _stampMaterial.SetTexture(DecalTextureId, _configuration.Texture);
             _stampMaterial.SetColor(DecalColorId, _configuration.Color);
             _stampMaterial.SetVector(DecalUVId, uv);
-            _stampMaterial.SetFloat(DecalSizeId, Random.Range(_configuration.MinSize, _configuration.MaxSize));
+            _stampMaterial.SetVector(SurfaceSizeId, surfaceSize);
+            _stampMaterial.SetFloat(DecalSizeId, Random.Range(_configuration.MinSize, _configuration.MaxSize) * 0.5f);
             _stampMaterial.SetFloat(DecalRotationId, Random.Range(0f, Mathf.PI * 2f));
 
             return _stampMaterial;
