@@ -4,6 +4,7 @@ namespace Features.AssetLoaderModule.Scripts
     {
         public static class Configurations
         {
+            public const string AudioConfiguration = "AudioConfiguration";
             public const string CameraConfiguration = "CameraConfiguration";
             public const string ImpactDecalConfiguration = "ImpactDecalConfiguration";
             public const string MeshGenerationConfiguration = "MeshGenerationConfiguration";

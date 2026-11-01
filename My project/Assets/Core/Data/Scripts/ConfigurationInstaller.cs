@@ -1,4 +1,5 @@
 using Features.AssetLoaderModule.Scripts;
+using Features.AudioModule.Scripts.UnityAudio;
 using Features.CameraModule.Scripts;
 using Features.ImpactDecalModule.Scripts;
 using Features.MeshGenerationModule.Scripts;
@@ -26,6 +27,7 @@ namespace Core.Data.Scripts
             Container.BindConfigurationFromAddressables<ImpactDecalConfiguration>(Address.Configurations.ImpactDecalConfiguration).AsSingle();
             Container.BindConfigurationFromAddressables<PowerWindowConfiguration>(Address.Configurations.PowerWindowConfiguration).AsSingle();
             Container.BindConfigurationFromAddressables<VfxConfiguration>(Address.Configurations.VfxConfiguration).AsSingle();
+            Container.BindConfigurationFromAddressables<AudioConfiguration>(Address.Configurations.AudioConfiguration).AsSingle();
         }
     }
 }
