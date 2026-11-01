@@ -13,17 +13,20 @@ namespace Features.WeaponModule.Scripts.Projectiles
         [SerializeField] private BoxPhysicsCollider _collider;
 
         private float _lifetimeLeft;
+        private int _ricochetsLeft;
 
         public event Action<IPoolableProjectile> Released;
+        public event Action<Vector3> Exploded;
 
         public IPhysicsBody Body => _body;
         public bool IsActive => gameObject.activeSelf;
 
-        public void OnSpawned(float lifetime)
+        public void OnSpawned(float lifetime, int maxRicochets)
         {
             gameObject.SetActive(true);
             _body.Velocity = Vector3.zero;
             _lifetimeLeft = lifetime;
+            _ricochetsLeft = maxRicochets;
         }
 
         public void OnDespawned()
@@ -42,5 +45,22 @@ namespace Features.WeaponModule.Scripts.Projectiles
 
         private void Awake() =>
             _collider.SetHalfExtents(_meshGenerator.HalfExtents);
+
+        private void OnEnable() =>
+            _collider.Collided += OnCollided;
+
+        private void OnDisable() =>
+            _collider.Collided -= OnCollided;
+
+        private void OnCollided(RaycastHit hit)
+        {
+            _ricochetsLeft--;
+
+            if (_ricochetsLeft > 0)
+                return;
+
+            Exploded?.Invoke(hit.point);
+            Released?.Invoke(this);
+        }
     }
 }

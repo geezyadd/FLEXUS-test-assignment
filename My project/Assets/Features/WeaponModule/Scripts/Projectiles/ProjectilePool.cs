@@ -50,7 +50,7 @@ namespace Features.WeaponModule.Scripts.Projectiles
         {
             IPoolableProjectile projectile = GetFree();
 
-            projectile.OnSpawned(_configuration.ProjectileLifetime);
+            projectile.OnSpawned(_configuration.ProjectileLifetime, _configuration.ProjectileMaxRicochets);
             _activeProjectiles.Add(projectile);
 
             return projectile.Body;

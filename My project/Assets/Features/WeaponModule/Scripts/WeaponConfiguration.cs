@@ -23,6 +23,7 @@ namespace Features.WeaponModule.Scripts
         [SerializeField, Range(0f, 1f)] private float _minShotShakeStrength = 0.6f;
         [SerializeField] private Projectile _projectilePrefab;
         [SerializeField, Min(0f)] private float _projectileLifetime = 5f;
+        [SerializeField, Min(1)] private int _projectileMaxRicochets = 2;
         [SerializeField, Min(0)] private int _projectilePoolSize = 20;
         [SerializeField, Min(1)] private int _projectilePoolMaxSize = 100;
 
@@ -40,6 +41,7 @@ namespace Features.WeaponModule.Scripts
         public float MinShotShakeStrength => _minShotShakeStrength;
         public Projectile ProjectilePrefab => _projectilePrefab;
         public float ProjectileLifetime => _projectileLifetime;
+        public int ProjectileMaxRicochets => _projectileMaxRicochets;
         public int ProjectilePoolSize => _projectilePoolSize;
         public int ProjectilePoolMaxSize => _projectilePoolMaxSize;
 

@@ -10,7 +10,7 @@ namespace Features.WeaponModule.Scripts.Projectiles
         IPhysicsBody Body { get; }
         bool IsActive { get; }
 
-        void OnSpawned(float lifetime);
+        void OnSpawned(float lifetime, int maxRicochets);
         void OnDespawned();
         void Tick(float deltaTime);
     }
