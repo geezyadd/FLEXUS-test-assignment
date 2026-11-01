@@ -21,5 +21,9 @@ MonoBehaviour:
     _clip: {fileID: 8300000, guid: 600916f82d424693877c91f4a38cc62c, type: 3}
     _volume: 1
     _spatialBlend: 0.8
+  - _type: 2
+    _clip: {fileID: 8300000, guid: 534337094d40423a85f44a72ecb49a3e, type: 3}
+    _volume: 1
+    _spatialBlend: 0.3
   _prewarmCount: 8
   _maxCount: 32

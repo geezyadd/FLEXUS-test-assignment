@@ -18,6 +18,7 @@ namespace Features.WeaponModule.Scripts.Projectiles
         public event Action<IPoolableProjectile> Released;
         public event Action Spawned;
         public event Action Despawned;
+        public event Action<Vector3> Ricocheted;
         public event Action<Vector3> Exploded;
 
         public IPhysicsBody Body => _body;
@@ -62,7 +63,10 @@ namespace Features.WeaponModule.Scripts.Projectiles
             _ricochetsLeft--;
 
             if (_ricochetsLeft > 0)
+            {
+                Ricocheted?.Invoke(hit.point);
                 return;
+            }
 
             Exploded?.Invoke(hit.point);
             Released?.Invoke(this);
