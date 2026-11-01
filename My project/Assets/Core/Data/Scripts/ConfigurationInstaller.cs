@@ -1,5 +1,6 @@
 using Features.AssetLoaderModule.Scripts;
 using Features.CameraModule.Scripts;
+using Features.ImpactDecalModule.Scripts;
 using Features.MeshGenerationModule.Scripts;
 using Features.PhysicsModule.Scripts;
 using Features.ScreenShakeModule.Scripts;
@@ -20,6 +21,7 @@ namespace Core.Data.Scripts
             Container.BindConfigurationFromAddressables<CameraConfiguration>(Address.Configurations.CameraConfiguration).AsSingle();
             Container.BindConfigurationFromAddressables<ScreenShakeConfiguration>(Address.Configurations.ScreenShakeConfiguration).AsSingle();
             Container.BindConfigurationFromAddressables<TrajectoryConfiguration>(Address.Configurations.TrajectoryConfiguration).AsSingle();
+            Container.BindConfigurationFromAddressables<ImpactDecalConfiguration>(Address.Configurations.ImpactDecalConfiguration).AsSingle();
         }
     }
 }

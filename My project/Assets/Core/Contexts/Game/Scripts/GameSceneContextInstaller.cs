@@ -1,4 +1,5 @@
 using Features.CameraModule.Scripts;
+using Features.ImpactDecalModule.Scripts;
 using Features.PhysicsModule.Scripts;
 using Features.ScreenShakeModule.Scripts;
 using Features.TrajectoryModule.Scripts;
@@ -16,6 +17,7 @@ namespace Core.Contexts.Game.Scripts
             CameraInstaller.Install(Container);
             ScreenShakeInstaller.Install(Container);
             TrajectoryInstaller.Install(Container);
+            ImpactDecalInstaller.Install(Container);
         }
     }
 }
