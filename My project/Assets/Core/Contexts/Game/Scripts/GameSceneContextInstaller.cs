@@ -1,6 +1,7 @@
 using Features.CameraModule.Scripts;
 using Features.PhysicsModule.Scripts;
 using Features.ScreenShakeModule.Scripts;
+using Features.TrajectoryModule.Scripts;
 using Features.WeaponModule.Scripts;
 using Zenject;
 
@@ -14,6 +15,7 @@ namespace Core.Contexts.Game.Scripts
             WeaponInstaller.Install(Container);
             CameraInstaller.Install(Container);
             ScreenShakeInstaller.Install(Container);
+            TrajectoryInstaller.Install(Container);
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Features.WeaponModule.Scripts
         [SerializeField, Min(0f)] private float _minShotPower = 5f;
         [SerializeField, Min(0f)] private float _maxShotPower = 30f;
         [SerializeField, Min(0f)] private float _shotPowerStep = 1f;
+        [SerializeField, Min(0f)] private float _shotPowerSmoothing = 10f;
         [SerializeField, Range(0f, 1f)] private float _minShotShakeStrength = 0.6f;
         [SerializeField] private Projectile _projectilePrefab;
         [SerializeField, Min(0f)] private float _projectileLifetime = 5f;
@@ -35,6 +36,7 @@ namespace Features.WeaponModule.Scripts
         public float MinShotPower => _minShotPower;
         public float MaxShotPower => _maxShotPower;
         public float ShotPowerStep => _shotPowerStep;
+        public float ShotPowerSmoothing => _shotPowerSmoothing;
         public float MinShotShakeStrength => _minShotShakeStrength;
         public Projectile ProjectilePrefab => _projectilePrefab;
         public float ProjectileLifetime => _projectileLifetime;

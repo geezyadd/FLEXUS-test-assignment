@@ -12,17 +12,17 @@ namespace Features.PhysicsModule.Scripts
     {
         private readonly IGameUpdater _updater;
         private readonly ICollisionSolver _collisionSolver;
-        private readonly List<IPhysicsForce> _forces;
+        private readonly IPhysicsSimulator _simulator;
         private readonly Dictionary<PhysicsSmoothing, ISmoothingStrategy> _strategies = new();
         private readonly List<IPhysicsBody> _bodies = new();
         private readonly Dictionary<IPhysicsBody, int> _indices = new();
 
-        public PhysicsWorld(IGameUpdater updater, ICollisionSolver collisionSolver, List<IPhysicsForce> forces,
+        public PhysicsWorld(IGameUpdater updater, ICollisionSolver collisionSolver, IPhysicsSimulator simulator,
             List<ISmoothingStrategy> strategies)
         {
             _updater = updater;
             _collisionSolver = collisionSolver;
-            _forces = forces;
+            _simulator = simulator;
 
             foreach (ISmoothingStrategy strategy in strategies)
                 _strategies.Add(strategy.Mode, strategy);
@@ -89,21 +89,9 @@ namespace Features.PhysicsModule.Scripts
 
         private void Simulate(IPhysicsBody body, float deltaTime)
         {
-            Vector3 velocity = ApplyForces(body, body.Velocity, deltaTime);
-            body.Velocity = ApplyDrag(body, velocity, deltaTime);
+            body.Velocity = _simulator.GetNextVelocity(body, body.Velocity, deltaTime);
             Move(body, body.Velocity * deltaTime);
         }
-
-        private Vector3 ApplyForces(IPhysicsBody body, Vector3 velocity, float deltaTime)
-        {
-            foreach (IPhysicsForce force in _forces)
-                velocity += force.GetForce(body) * deltaTime;
-
-            return velocity;
-        }
-
-        private Vector3 ApplyDrag(IPhysicsBody body, Vector3 velocity, float deltaTime) =>
-            velocity * (1f - Mathf.Min(1f, body.Drag * deltaTime));
 
         private void Move(IPhysicsBody body, Vector3 move)
         {

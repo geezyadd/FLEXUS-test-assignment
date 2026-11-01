@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Configurations
   m_GUID: c1b6867b5f1282a4e89fbcac1031cf1b
   m_SerializeEntries:
+  - m_GUID: 84d2556483374a92a10f4694945108b9
+    m_Address: TrajectoryConfiguration
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b73ba16e32b647a693714070499fb829
     m_Address: ScreenShakeConfiguration
     m_ReadOnly: 0

@@ -12,14 +12,17 @@ namespace Features.WeaponModule.Scripts.Turret
 
         private IProjectileSpawner _projectileSpawner;
 
+        public Vector3 LaunchPosition => _muzzle.position;
+        public Vector3 LaunchVelocity => _launchVelocityProvider.GetLaunchVelocity();
+
         [Inject]
         private void InjectDependencies(IProjectileSpawner projectileSpawner) => _projectileSpawner = projectileSpawner;
 
         public void Fire()
         {
             IPhysicsBody projectile = _projectileSpawner.Spawn();
-            projectile.Teleport(_muzzle.position);
-            projectile.Velocity = _launchVelocityProvider.GetLaunchVelocity();
+            projectile.Teleport(LaunchPosition);
+            projectile.Velocity = LaunchVelocity;
         }
     }
 }

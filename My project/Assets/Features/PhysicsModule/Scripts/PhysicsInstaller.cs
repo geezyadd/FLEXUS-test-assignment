@@ -9,6 +9,7 @@ namespace Features.PhysicsModule.Scripts
         public override void InstallBindings()
         {
             Container.Bind<IPhysicsForce>().To<GravityForce>().AsSingle();
+            Container.Bind<IPhysicsSimulator>().To<PhysicsSimulator>().AsSingle();
 
             Container.Bind<ISmoothingStrategy>().To<NoSmoothingStrategy>().AsSingle();
             Container.Bind<ISmoothingStrategy>().To<InterpolateSmoothingStrategy>().AsSingle();

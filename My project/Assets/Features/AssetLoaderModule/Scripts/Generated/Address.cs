@@ -8,6 +8,7 @@ namespace Features.AssetLoaderModule.Scripts
             public const string MeshGenerationConfiguration = "MeshGenerationConfiguration";
             public const string PhysicsConfiguration = "PhysicsConfiguration";
             public const string ScreenShakeConfiguration = "ScreenShakeConfiguration";
+            public const string TrajectoryConfiguration = "TrajectoryConfiguration";
             public const string WeaponConfiguration = "WeaponConfiguration";
         }
 

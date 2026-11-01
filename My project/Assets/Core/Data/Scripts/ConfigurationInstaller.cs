@@ -3,6 +3,7 @@ using Features.CameraModule.Scripts;
 using Features.MeshGenerationModule.Scripts;
 using Features.PhysicsModule.Scripts;
 using Features.ScreenShakeModule.Scripts;
+using Features.TrajectoryModule.Scripts;
 using Features.WeaponModule.Scripts;
 using Plugins.Zenject.Addons.AddressablesConfigurationsLoader;
 using Zenject;
@@ -18,6 +19,7 @@ namespace Core.Data.Scripts
             Container.BindConfigurationFromAddressables<MeshGenerationConfiguration>(Address.Configurations.MeshGenerationConfiguration).AsSingle();
             Container.BindConfigurationFromAddressables<CameraConfiguration>(Address.Configurations.CameraConfiguration).AsSingle();
             Container.BindConfigurationFromAddressables<ScreenShakeConfiguration>(Address.Configurations.ScreenShakeConfiguration).AsSingle();
+            Container.BindConfigurationFromAddressables<TrajectoryConfiguration>(Address.Configurations.TrajectoryConfiguration).AsSingle();
         }
     }
 }
